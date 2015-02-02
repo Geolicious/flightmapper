@@ -20,7 +20,8 @@
  ***************************************************************************/
 """
 
-from PyQt4.QtCore import QFileInfo
+#from PyQt4.QtCore import QFileInfo
+from PyQt4.QtCore import *
 import osgeo.ogr, osgeo.osr #we will need some packages
 from osgeo import ogr
 from osgeo import gdal
@@ -107,11 +108,26 @@ def flightmapper_exec(basemap, resolution, point_layer, folder, title):
 		safeLayerName = re.sub('[\W_]+', '', i.name())
 		if safeLayerName == re.sub('[\W_]+', '', point_layer):
 			print i.name()
-			qgis.core.QgsVectorFileWriter.writeAsVectorFormat(i,dataStore + os.sep + 'exp_' + safeLayerName + '.js', 'utf-8', exp_crs, 'GeoJson',0, layerOptions=["COORDINATE_PRECISION=4"])
-			with open(dataStore + os.sep + 'exp_' + safeLayerName + '.js', "r+") as f2:
+			#let's prepare the line file
+			layer =  QgsVectorLayer('LineString', 'line' , "memory")
+			pr = layer.dataProvider() 
+			line = QgsFeature()
+			vertexes = []
+			# now iterate over the points in the file and create a path:
+			features = i.getFeatures()
+			for f in features:
+				geom = f.geometry()
+				vertex = geom.asPoint()
+				vertexes.append(vertex)
+			line.setGeometry(QgsGeometry.fromPolyline(vertexes))
+			pr.addFeatures([line])
+			layer.updateExtents()
+			exp_crs = QgsCoordinateReferenceSystem(4326, QgsCoordinateReferenceSystem.EpsgCrsId)
+			qgis.core.QgsVectorFileWriter.writeAsVectorFormat(layer,dataStore + os.sep + 'exp_line.js', 'utf-8', exp_crs, 'GeoJson', 0, layerOptions=["COORDINATE_PRECISION=4"])
+			with open(dataStore + os.sep + 'exp_line.js', "r+") as f2:
 				old = f2.read() # read everything in the file
 				f2.seek(0) # rewind
-				f2.write("var exp_" + str(safeLayerName) + " = " + old) # write the new line before
+				f2.write("var exp_line = " + old) # write the new line before
 				f2.close()
 
 	webbrowser.open(os.path.join(os.getcwd(),outputProjectFileName) + os.sep + 'index.html')
