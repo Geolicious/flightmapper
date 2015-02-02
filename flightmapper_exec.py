@@ -47,7 +47,8 @@ def flightmapper_exec(basemap, resolution, point_layer, folder, title):
 	QgsApplication.initQgis()
 	# let's determine the current work folder of qgis:
 	print os.getcwd()		
-	# let's create the overall folder structure:
+	
+## let's create the overall folder structure:
 	outputProjectFileName = os.path.join(folder, 'export_' + str(time.strftime("%Y_%m_%d")) + '_' + str(time.strftime("%I_%M_%S")))
 	jsStore = os.path.join(os.getcwd(),outputProjectFileName, 'js')
 	os.makedirs(jsStore)
@@ -68,10 +69,9 @@ def flightmapper_exec(basemap, resolution, point_layer, folder, title):
 	os.makedirs(picturesStore)
 	miscStore = os.path.join(os.getcwd(),outputProjectFileName, 'misc')
 	os.makedirs(miscStore)
-	#lets create a css file for own css:
-	
-	#the index file has an easy beginning. we will store it right away:
-	canvas = qgis.utils.iface.mapCanvas()
+	#the call for densifying a line:
+	#processing.runalg("qgis:densifygeometries","C:\\Users\\ricckli\\.qgis2\\python\\plugins\\qgis2leaf\\test_data\\line_feature.shp",10,None)
+##lets write the beginning of the index.html	
 	with open(os.path.join(os.getcwd(),outputProjectFileName) + os.sep + 'index.html', 'w') as f_html:
 		base = """
 <!DOCTYPE html>
@@ -99,14 +99,15 @@ def flightmapper_exec(basemap, resolution, point_layer, folder, title):
 	"""
 		f_html.write(base)
 		f_html.close()
-	# let's create the js files in the data folder of input vector files:
-
+# let's create the js files in the data folder of input vector files:
+	canvas = qgis.utils.iface.mapCanvas()
 	allLayers = canvas.layers()
 	exp_crs = QgsCoordinateReferenceSystem(4326, QgsCoordinateReferenceSystem.EpsgCrsId)
 	for i in allLayers: 
 		safeLayerName = re.sub('[\W_]+', '', i.name())
 		if safeLayerName == re.sub('[\W_]+', '', point_layer):
-			qgis.core.QgsVectorFileWriter.writeAsVectorFormat(i,dataStore + os.sep + 'exp_' + safeLayerName + '.js', 'utf-8', exp_crs, 'GeoJson', 1, layerOptions=["COORDINATE_PRECISION=4"])
+			print i.name()
+			qgis.core.QgsVectorFileWriter.writeAsVectorFormat(i,dataStore + os.sep + 'exp_' + safeLayerName + '.js', 'utf-8', exp_crs, 'GeoJson',0, layerOptions=["COORDINATE_PRECISION=4"])
 			with open(dataStore + os.sep + 'exp_' + safeLayerName + '.js', "r+") as f2:
 				old = f2.read() # read everything in the file
 				f2.seek(0) # rewind
