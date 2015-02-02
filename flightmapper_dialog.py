@@ -27,6 +27,8 @@ from  qgis.utils import *
 #from Ui_flightmapperDialogBase import setupUi
 from qgis import *
 import os.path
+#here is the executable:
+from flightmapper_exec import flightmapper_exec
 
 
 
@@ -45,11 +47,20 @@ class flightmapperDialog(QtGui.QDialog, FORM_CLASS):
 		# #widgets-and-dialogs-with-auto-connect
 		self.setupUi(self)
 		self.setWindowTitle("QGIS flightmapper")
+		self.okButton.clicked.connect(self.flightmapper)	  
+
 		def loadlayer(self):
-			print "I am in!!!"
+			print "Interface loaded"
 			#canvas = Qgis.utils.iface.mapCanvas()
 			#allLayers = canvas.layers()
 			#for i in allLayers:
 			#	if i.type() == 0: 
 			#		self.ui.comboBox.addItem(i.name())
 		#loadlayer(self)
+	def flightmapper(self):
+		self.basemap = self.comboBox_3.currentText()
+		self.resolution = self.comboBox_2.currentText()
+		self.point_layer = self.comboBox.currentText()
+		self.folder = self.lineEdit.text()
+		self.title = self.lineEdit_2.text()
+		flightmapper_exec(self.basemap, self.resolution, self.point_layer, self.folder, self.title)

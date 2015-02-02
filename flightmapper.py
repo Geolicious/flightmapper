@@ -61,8 +61,6 @@ class flightmapper:
 		# Create the dialog (after translation) and keep reference
 		self.dlg = flightmapperDialog()
 
-		#result = dlg.exec_()
-		print "I am in"
 		# Declare instance attributes
 		self.actions = []
 		self.menu = self.tr(u'&flightmapper')
@@ -146,11 +144,20 @@ class flightmapper:
 		"""Run method that performs all the real work"""
 		# show the dialog
 		self.dlg.show()
+		#add all "possible" layers:
 		self.dlg.comboBox.clear()
 		canvas = qgis.utils.iface.mapCanvas()
 		allLayers = canvas.layers()
 		for layer in allLayers:
 			if layer.type() == 0:
 	  			self.dlg.comboBox.addItem(layer.name())
+		#add basemaps
+		self.dlg.comboBox_3.addItem("OSM")
+		self.dlg.comboBox_3.addItem("WaterColor")
+		#add resolutions:
+		self.dlg.comboBox_2.addItem("0.1 km")
+		self.dlg.comboBox_2.addItem("1 km")
+		self.dlg.comboBox_2.addItem("5 km")
+		self.dlg.comboBox_2.addItem("10 km")
 		# Run the dialog event loop
 		result = self.dlg.exec_()

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'flightmapper_dialog_base.ui'
 #
-# Created: Sun Feb 01 21:59:49 2015
+# Created: Mon Feb 02 06:52:00 2015
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,11 +27,6 @@ class Ui_flightmapperDialogBase(object):
     def setupUi(self, flightmapperDialogBase):
         flightmapperDialogBase.setObjectName(_fromUtf8("flightmapperDialogBase"))
         flightmapperDialogBase.resize(348, 275)
-        self.button_box = QtGui.QDialogButtonBox(flightmapperDialogBase)
-        self.button_box.setGeometry(QtCore.QRect(170, 240, 171, 32))
-        self.button_box.setOrientation(QtCore.Qt.Horizontal)
-        self.button_box.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.button_box.setObjectName(_fromUtf8("button_box"))
         self.label = QtGui.QLabel(flightmapperDialogBase)
         self.label.setGeometry(QtCore.QRect(10, 10, 211, 31))
         font = QtGui.QFont()
@@ -87,10 +82,20 @@ class Ui_flightmapperDialogBase(object):
         self.lineEdit_2 = QtGui.QLineEdit(flightmapperDialogBase)
         self.lineEdit_2.setGeometry(QtCore.QRect(90, 150, 201, 20))
         self.lineEdit_2.setObjectName(_fromUtf8("lineEdit_2"))
+        self.widget = QtGui.QWidget(flightmapperDialogBase)
+        self.widget.setGeometry(QtCore.QRect(180, 240, 162, 27))
+        self.widget.setObjectName(_fromUtf8("widget"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
+        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.cancelButton = QtGui.QPushButton(self.widget)
+        self.cancelButton.setObjectName(_fromUtf8("cancelButton"))
+        self.horizontalLayout.addWidget(self.cancelButton)
+        self.okButton = QtGui.QPushButton(self.widget)
+        self.okButton.setObjectName(_fromUtf8("okButton"))
+        self.horizontalLayout.addWidget(self.okButton)
 
         self.retranslateUi(flightmapperDialogBase)
-        QtCore.QObject.connect(self.button_box, QtCore.SIGNAL(_fromUtf8("accepted()")), flightmapperDialogBase.accept)
-        QtCore.QObject.connect(self.button_box, QtCore.SIGNAL(_fromUtf8("rejected()")), flightmapperDialogBase.reject)
         QtCore.QMetaObject.connectSlotsByName(flightmapperDialogBase)
 
     def retranslateUi(self, flightmapperDialogBase):
@@ -103,4 +108,6 @@ class Ui_flightmapperDialogBase(object):
         self.label_5.setText(_translate("flightmapperDialogBase", "Export Folder", None))
         self.pushButton_3.setText(_translate("flightmapperDialogBase", "...", None))
         self.label_6.setText(_translate("flightmapperDialogBase", "Title", None))
+        self.cancelButton.setText(_translate("flightmapperDialogBase", "Cancel", None))
+        self.okButton.setText(_translate("flightmapperDialogBase", "OK", None))
 
