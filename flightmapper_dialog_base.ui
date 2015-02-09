@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>348</width>
-    <height>275</height>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -57,19 +57,6 @@
    </property>
    <property name="text">
     <string>Point Layer</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>60</y>
-     <width>31</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>...</string>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox">
@@ -135,7 +122,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>210</y>
+     <y>250</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -148,7 +135,7 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>210</y>
+     <y>250</y>
      <width>31</width>
      <height>21</height>
     </rect>
@@ -161,7 +148,7 @@
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>210</y>
+     <y>250</y>
      <width>201</width>
      <height>20</height>
     </rect>
@@ -171,7 +158,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>190</y>
+     <y>230</y>
      <width>331</width>
      <height>20</height>
     </rect>
@@ -203,11 +190,11 @@
     </rect>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>240</y>
+     <y>280</y>
      <width>162</width>
      <height>27</height>
     </rect>
@@ -229,14 +216,36 @@
     </item>
    </layout>
   </widget>
-  <zorder>comboBox</zorder>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>101</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add line to map</string>
+   </property>
+  </widget>
+  <zorder>layoutWidget</zorder>
   <zorder>label</zorder>
   <zorder>line</zorder>
   <zorder>label_2</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>label_2</zorder>
-  <zorder>pushButton_2</zorder>
   <zorder>comboBox</zorder>
   <zorder>comboBox_2</zorder>
   <zorder>label_3</zorder>
@@ -248,8 +257,8 @@
   <zorder>line_2</zorder>
   <zorder>label_6</zorder>
   <zorder>lineEdit_2</zorder>
-  <zorder>cancelButton</zorder>
-  <zorder>okButton</zorder>
+  <zorder>label_7</zorder>
+  <zorder>checkBox</zorder>
  </widget>
  <resources/>
  <connections/>

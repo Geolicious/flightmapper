@@ -41,6 +41,7 @@ class flightmapperDialog(QtGui.QDialog, FORM_CLASS):
 	def __init__(self, parent=None):
 		"""Constructor."""
 		super(flightmapperDialog, self).__init__(parent)
+		QtGui.QDialog.__init__(self)
 		# Set up the user interface from Designer.
 		# After setupUI you can access any designer object by doing
 		# self.<objectname>, and you can use autoconnect slots - see
@@ -51,7 +52,15 @@ class flightmapperDialog(QtGui.QDialog, FORM_CLASS):
 		self.okButton.clicked.connect(self.flightmapper)	  
 		self.cancelButton.clicked.connect(self.close)
 		self.lineEdit.setText(tempfile.gettempdir())
-
+		self.folder = self.lineEdit.text()
+		self.pushButton_3.clicked.connect(self.showSaveDialog)
+	def showSaveDialog(self):
+		self.folder = str(QtGui.QFileDialog.getExistingDirectory(self, "Output Project Name:"))
+		if self.folder != None:
+			self.okButton.setDisabled(False)
+		self.lineEdit.clear()
+		self.lineEdit.setText(self.folder)
+		#elf.pushButton_3.clicked.connect(self.showSaveDialog(self))
 
 		def loadlayer(self):
 			print "Interface loaded"
@@ -64,8 +73,21 @@ class flightmapperDialog(QtGui.QDialog, FORM_CLASS):
 	def flightmapper(self):
 		self.basemap = self.comboBox_3.currentText()
 		self.resolution = self.comboBox_2.currentText()
+		if self.resolution == "500 km":
+			self.resolution = 500000
+		if self.resolution == "100 km":
+			self.resolution = 100000
+		if self.resolution == "50 km":
+			self.resolution = 50000
+		if self.resolution == "10 km":
+			self.resolution = 10000
+		if self.resolution == "5 km":
+			self.resolution = 5000
+		if self.resolution == "1 km":
+			self.resolution = 1000
 		self.point_layer = self.comboBox.currentText()
 		self.folder = self.lineEdit.text()
 		self.title = self.lineEdit_2.text()
-		flightmapper_exec(self.basemap, self.resolution, self.point_layer, self.folder, self.title)
-		#self.close()
+		self.add = self.checkBox.isChecked()
+		flightmapper_exec(self.basemap, self.resolution, self.point_layer, self.folder, self.title, self.add)
+		self.close()

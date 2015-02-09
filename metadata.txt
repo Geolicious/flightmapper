@@ -10,6 +10,7 @@
 name=flightmapper
 qgisMinimumVersion=2.6
 description=create flightroutes and publish them as a webmap
+about=flightmapper exports great circles connecting your input points as a leaflet based webmap.
 version=0.1
 author=Riccardo Klinger/ Geolicious
 email=riccardo.klinger@geolicious.de
@@ -19,7 +20,7 @@ email=riccardo.klinger@geolicious.de
 # Optional items:
 
 # Uncomment the following line and add your changelog:
-# changelog=
+changelog= 2014/02/09 v.0.1: initial commit
 
 # Tags are comma separated with spaces allowed
 tags=web leaflet routes

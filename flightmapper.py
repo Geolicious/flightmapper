@@ -144,20 +144,26 @@ class flightmapper:
 		"""Run method that performs all the real work"""
 		# show the dialog
 		self.dlg.show()
-		#add all "possible" layers:
+		#clear old entries:
 		self.dlg.comboBox.clear()
+		self.dlg.comboBox_3.clear()
+		self.dlg.comboBox_2.clear()
+		#add all "possible" layers:
 		canvas = qgis.utils.iface.mapCanvas()
 		allLayers = canvas.layers()
 		for layer in allLayers:
-			if layer.type() == 0:
+			if layer.type() == 0 and layer.geometryType() == 0:
 	  			self.dlg.comboBox.addItem(layer.name())
 		#add basemaps
 		self.dlg.comboBox_3.addItem("OSM")
 		self.dlg.comboBox_3.addItem("WaterColor")
 		#add resolutions:
-		self.dlg.comboBox_2.addItem("0.1 km")
 		self.dlg.comboBox_2.addItem("1 km")
 		self.dlg.comboBox_2.addItem("5 km")
 		self.dlg.comboBox_2.addItem("10 km")
+		self.dlg.comboBox_2.addItem("50 km")
+		self.dlg.comboBox_2.addItem("100 km")
+		self.dlg.comboBox_2.addItem("500 km")
+
 		# Run the dialog event loop
 		result = self.dlg.exec_()
